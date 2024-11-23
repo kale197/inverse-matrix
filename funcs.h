@@ -17,6 +17,7 @@ void InputMatrix(matrix mat, int dimension)
     }
     
 }
+
 //function to print square matrix
 void PrintMatrix(matrix mat, int dimension)
 {
@@ -29,8 +30,8 @@ void PrintMatrix(matrix mat, int dimension)
         }
         printf("\n\n");    
     }
-    
 }
+
 //function to determine the minor of the matrix 'mat', row and col are to be eliminated.
 void FindMinor(matrix mat, matrix temp, int row, int col, int dimension){
 
@@ -52,9 +53,7 @@ void FindMinor(matrix mat, matrix temp, int row, int col, int dimension){
                     j=0;
                     i++;
                 }
-                
             }
-
         }
 }
 //Recursive function to calculate the determinant (square matrix)
@@ -87,11 +86,7 @@ int Determinant(matrix mat, int dimension)
     return result;   
 }
 
-
-
-
-
-// Formatted output of the fmatrx
+// Formatted output of the float matrix
 void PrintFMatrix(fmatrix fmat, int dimension)
 {
     for (int i = 0; i < dimension; i++)
@@ -106,7 +101,7 @@ void PrintFMatrix(fmatrix fmat, int dimension)
     
 }
 
-//function that multiplies integer elements with scalar and place into float matrix.
+//function that multiplies integer elements with scalar and places it into float matrix.
 void TimesScalar(float scal, matrix mat, fmatrix fmat, int dimension)
 {
     for (int i = 0; i < dimension; i++)
@@ -117,6 +112,7 @@ void TimesScalar(float scal, matrix mat, fmatrix fmat, int dimension)
         }   
     }
 }
+
 // function that calculates adjugate matrix which will be multiplied with the determinant.
 void Adjugate(matrix mat, matrix result, int dimension)
 {
@@ -132,9 +128,6 @@ void Adjugate(matrix mat, matrix result, int dimension)
             if ((i+j) %2 == 0) sign = 1; else sign=-1;
 
             result[j][i] = sign * Determinant(temp, dimension-1);
-            
-        }
-        
+        }  
     }
-    
 }
