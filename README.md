@@ -69,6 +69,30 @@ int Determinant(matrix mat, int dimension) {
     return result;
 }
 ```
+### `Adjugate`
+Calculates the adjugate (or adjoint) of a matrix, which will be multiplied by the determinant to compute the inverse.
+
+```c
+// Function to calculate the adjugate matrix
+void Adjugate(matrix mat, matrix result, int dimension) {
+    matrix temp;
+    int sign;
+
+    for (int i = 0; i < dimension; i++) {
+        for (int j = 0; j < dimension; j++) {
+            // Calculate the minor of the element at (i, j)
+            FindMinor(mat, temp, i, j, dimension);
+
+            // Determine the sign based on position
+            sign = ((i + j) % 2 == 0) ? 1 : -1;
+
+            // Assign cofactor to the transposed position
+            result[j][i] = sign * Determinant(temp, dimension - 1);
+        }
+    }
+}
+
+```
 ### `Inverse`
 Calculates the final inverse of a matrix using its adjugate and determinant.
 
