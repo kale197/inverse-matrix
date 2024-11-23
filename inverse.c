@@ -2,7 +2,7 @@
 #include "funcs.h"
 
 // function to calculate final inverse matrix.
-void Inverzna(matrix mat, matrix adjug, fmatrix final, int dimension)
+void Inverse(matrix mat, matrix adjug, fmatrix final, int dimension)
 {
     float scalar = 1.00 / Determinant(mat, dimension);    
     TimesScalar(scalar, adjug, final, dimension);
@@ -26,7 +26,7 @@ int main(int argc, char const *argv[])
     PrintMatrix(m1,dim);
     printf("Inverse matrix:\n");
     Adjugate(m1,adj,dim);
-    Inverzna(m1, adj, in_mx,dim);
+    Inverse(m1, adj, in_mx,dim);
     PrintFMatrix(in_mx,dim);
 
     
