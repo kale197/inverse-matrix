@@ -8,7 +8,77 @@
     3. the *cofactors* for the *adjugate matrix*
     4. the *minors* for the *cofactors*
 - Output is a formatted, `float` inverse matrix. 
+## Notable Functions
 
+### `FindMinor`
+This function calculates the minor of a matrix by eliminating a specified row and column.
+
+```c
+// Function to determine the minor of the matrix 'mat'
+// 'row' and 'col' are to be eliminated.
+void FindMinor(matrix mat, matrix temp, int row, int col, int dimension) {
+    // Initialize counters
+    int i = 0, j = 0;
+
+    for (int r = 0; r < dimension; r++) { // Traverse 'mat'
+        for (int k = 0; k < dimension; k++) {
+            // Skip the specified row and column
+            if (r != row && k != col) {
+                temp[i][j++] = mat[r][k]; // Assign value to temp
+
+                // Move to the next row when the column limit is reached
+                if (j == dimension - 1) {
+                    j = 0;
+                    i++;
+                }
+            }
+        }
+    }
+}
+```
+### `Determinant`
+A recursive function to compute the determinant of a square matrix. It handles base cases for 1x1 and 2x2 matrices.
+
+```c
+// Recursive function to calculate the determinant of a square matrix
+int Determinant(matrix mat, int dimension) {
+    int result = 0;
+
+    // Base case for 1x1 matrix
+    if (dimension == 1) return mat[0][0];
+
+    // Base case for 2x2 matrix
+    if (dimension == 2) {
+        return mat[0][0] * mat[1][1] - mat[0][1] * mat[1][0];
+    }
+
+    matrix temp; // Temporary matrix to store minors
+    int sign = 1;
+
+    for (int kol = 0; kol < dimension; kol++) {
+        // Find minor of mat[0][kol]
+        FindMinor(mat, temp, 0, kol, dimension);
+
+        // Recursive call
+        result += sign * mat[0][kol] * Determinant(temp, dimension - 1);
+
+        // Alternate sign for cofactor expansion
+        sign = -sign;
+    }
+
+    return result;
+}
+```
+### `Inverse`
+Calculates the final inverse of a matrix using its adjugate and determinant.
+
+```c
+// Function to calculate the inverse matrix
+void Inverse(matrix mat, matrix adjug, fmatrix final, int dimension) {
+    float scalar = 1.00 / Determinant(mat, dimension);    
+    TimesScalar(scalar, adjug, final, dimension);
+}
+```
 ## Timeline
 #### Oct 9 2024
 - Final touches
